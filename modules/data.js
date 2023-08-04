@@ -1,70 +1,11 @@
-
-export const BOOKS_PER_PAGE = 36;
-
-/**
-     * This object literal stores the settings of the colors of the dark and night mode in 'RGB' form. 
-     * This will update the css settings when user chooses between dark and night mode
-     * @type {Object}
-     */
-export const RGBValues = { 
-  day: {
-      dark: '10, 10, 20',
-      light: '255, 255, 255',
-  },
-  
-  night :{
-      dark: '255, 255, 255',
-      light: '10, 10, 20',
-  }
-  }
+// @ts-check
 
 /**
- * An object literal that contains references to the all the HTML elements 
- * referenced through the operation of the web app either upon initialisation 
- * or while its running (via event listeners). T
- * his will ensure that all the user interface elements can be 
- * access and seen in a structured manner in a single data structure
- */
-export const html = {
-  list: {
-      item: document.querySelector('[data-list-items]'),
-      message: document.querySelector('[data-list-message]'),
-      button : document.querySelector('[data-list-button]')},
-  preview : {
-     active: document.querySelector('[data-list-active]'),
-     blur : document.querySelector('[data-list-blur]'),
-     image: document.querySelector('[data-list-image]'),
-     title: document.querySelector('[data-list-title]'),
-     subtitle: document.querySelector('[data-list-subtitle]'),
-     description: document.querySelector('[data-list-description]'),
-     close: document.querySelector('[data-list-close]')
-  },
-  search : {
-      overlay : document.querySelector('[data-search-overlay]'),
-      form: document.querySelector('[data-search-form]'),
-      title: document.querySelector('[data-search-title]'),
-      genre : document.querySelector('[data-search-genres]'),
-      author: document.querySelector('[data-search-authors]'),
-      cancel: document.querySelector('[data-search-cancel]')
-  },
-  settings : {
-      overlay: document.querySelector('[data-settings-overlay]'),
-      form: document.querySelector('[data-settings-form]'),
-      theme: document.querySelector('[data-settings-theme]'),
-      cancel: document.querySelector('[data-settings-cancel]')
-  },
-  other: {
-      settings: document.querySelector('[data-header-settings]'),
-      search: document.querySelector('[data-header-search]')
-  }
-  }
-
-/**
- * This object literal will the authors ID and author Name 
- * which is exported to be used the scripts.js file
+ * An object literal containing all authors referenced in the {@link books} array. Keys
+ * are given as id codes that correspond to each author's name
+ * 
  * @type {Object}
  */
-
 export const authors = {
   "194e164b-9365-4358-b44a-f28a93cc528f": "Steven D. Levitt",
   "76e8065c-fd7a-4a8b-a8ea-6105a47d0781": "Stephen J. Dubner",
@@ -156,9 +97,10 @@ export const authors = {
 }
 
 /**
- * This object literal will store all the genre ID's and genre categories which is 
- * exported to be used in the script.js file.
- * @type {Object} - genres
+ * An object literal containing all genres referenced in the {@link books} array. Keys are
+ * given as id codes that correspond to each genre name (given as a string)
+ *
+ * @type {Object}
  */
 export const genres = {
   "a4f80b3e-3e96-4266-b729-e09b71793182": "Economics",
@@ -231,13 +173,32 @@ export const genres = {
   "64c4197d-5f8e-4bff-b440-6d19bc591fd9": "Magic"
 }
 
+/** 
+ * An object in which the details for a single book are stored
+ * @typedef {Object | null} Book
+ * @property {string} id - unique id code
+ * @property {Array<string>} genres - an array with all genre id codes that apply to the
+ * book as per {@link genres}
+ * @property {number} popularity - numerical popularity rating
+ * @property {string} title - title of the book
+ * @property {string} image - url at which the book cover image can be accessed
+ * @property {string} description - a short summary of the book contents
+ * @property {number} pages - the length of the book in terms of page number
+ * @property {string} published - date of publication
+ * @property {string} author - id code of the book's author as per {@link authors}
+ */
 
 /**
- * This object literal hold the book properties including the id, genres, 
- * popularity, image, description, published date and author ID which will 
- * be exported to be used in the script.js file.
- * @type {Array}
-*/
+ * An array of all Book objects contained in the app's database
+ * @typedef {Array<Book>} BooksArray 
+ */
+
+/**
+ * An array containing information for each book that can be accessed within the app. Each
+ * element of the array contains information for a single book in the form of an object
+ * literal.
+ * @type {BooksArray}
+ */
 export const books = [
   {
     "id": "760b3450-9c86-42d0-8eff-e793bf823756",
@@ -606,7 +567,7 @@ export const books = [
     "description": "Humans and half-bloods agree—Percy Jackson and the Olympians is a series fit for heroes! Relive the adventure from the beginning with this boxed set of the first three books with glorious new cover art by John Rocco.\n\nThe Lightning Thief\nPercy Jackson is a good kid, but he can't seem to focus on his schoolwork or control his temper. When his mom tells him the truth about where he came from, she takes him to the one place he'll be safe—Camp Half-Blood, a summer camp for demigods (on Long Island). There, Percy learns that the father he never knew is actually Poseidon, God of the Sea. Soon Percy finds himself caught up in a mystery that could lead to disastrous consequences. Together with his friends—a satyr and another the demigod daughter of Athena—Percy sets out on a quest to reach the gates of the Underworld (located in a recording studio in Hollywood) and prevent a catastrophic war between the gods.\n\nThe Sea of Monsters\nAfter a summer spent trying to prevent a catastrophic war among the Greek gods, Percy Jackson finds his seventh-grade school year unnervingly calm. But things don't stay quiet for long. Percy soon discovers there is trouble at Camp Half-Blood: the magical borders which protect Half-Blood Hill have been poisoned by a mysterious enemy, and the only safe haven for demigods is on the verge of being overrun by mythological monsters. To save the camp, Percy needs the help of his best friend, Grover, who has been taken prisoner by the Cyclops Polyphemus on an island somewhere in the Sea of Monsters—the dangerous waters Greek heroes have sailed for millennia—only today, the Sea of Monsters goes by a new name: the Bermuda Triangle. Now Percy and his friends must retrieve the Golden Fleece from the Island of the Cyclops by the end of the summer or Camp Half-Blood will be destroyed. But first, Percy will learn a stunning new secret about his family—one that makes him question whether being claimed as Poseidon's son is an honor or simply a cruel joke…\n\nThe Titan's Curse\nWhen Percy Jackson receives a distress call from his friend Grover, he immediately prepares for battle. He knows he'll need his powerful demigod allies, Annabeth and Thalia, at his side; his trusty bronze sword Riptide; and…a ride from his mom. The demigods race to the rescue, to find that Grover has made an important discovery: two new powerful half-bloods whose parentage is unknown. But that's not all that awaits them. The Titan lord, Kronos, has set up his most devious trap yet, and the young heroes have unwittingly fallen prey. Hilarious and action-packed, this third adventure in the series finds Percy faced with his most dangerous challenge so far: the chilling prophecy of the Titan's curse.",
     "pages": 1032,
     "published": "2008-09-15T22:00:00.000Z",
-    
+    "author": "f4e286ff-586f-416e-82c6-e7bdc26f3df9"
   },
   {
     "id": "fae2da78-d55e-4521-8b27-e9d4e4c2cf76",

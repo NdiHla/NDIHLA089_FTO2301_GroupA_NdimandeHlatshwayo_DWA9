@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Book Connect</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/meta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/meta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/meta/favicon-16x16.png">
-    <link rel="manifest" href="/meta/manifest.json">
-    <link rel="mask-icon" href="/meta/safari-pinned-tab.svg" color="#0096ff">
-    <link rel="shortcut icon" href="/meta/favicon.ico">
-    <meta name="msapplication-TileColor" content="#0a0a14">
-    <meta name="msapplication-config" content="/meta/browserconfig.xml">
-    <meta name="theme-color" content="#0a0a14">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="meta/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="meta/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="meta/favicon-16x16.png"
+    />
+    <link rel="manifest" href="meta/manifest.json" />
+    <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#0096ff" />
+    <link rel="shortcut icon" href="meta/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#0a0a14" />
+    <meta name="msapplication-config" content="meta/browserconfig.xml" />
+    <meta name="theme-color" content="#0a0a14" />
 
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,7 +44,6 @@
   
   </head>
   <body>
-
     <header class="header">
       <div class="header__inner">
         <div class="header__logo">
@@ -65,6 +77,7 @@
         </div>
         <div>
           <button class="header__button" data-header-search>
+            <!-- search header button - will need event listener set on this to open search overlay -->
             <svg
               class="header__icon"
               viewBox="0 96 960 960"
@@ -75,7 +88,7 @@
               ></path>
             </svg>
           </button>
-
+          <!-- settings header button - will need event listener set on this to open theme overlay -->
           <button class="header__button" data-header-settings>
             <svg
               class="header__icon"
@@ -91,62 +104,98 @@
       </div>
     </header>
 
+    <!-- list of all current results -->
     <main class="list">
       <div class="list__items" data-list-items></div>
-      <div class="list__message" data-list-message>No results found. Your filters might be too narrow.</div>
+      <div class="list__message" data-list-message>
+        No results found. Your filters might be too narrow.
+      </div>
       <button class="list__button" data-list-button></button>
+      <!-- data list button needs to show more options when pressed, and inner text needs to be set to total number results -->
     </main>
 
-     <book-preview></book-preview> 
-    
-
-    <dialog class="overlay" data-search-overlay> <!--for the search button-->
+    <!-- Search menu = form -->
+    <dialog class="overlay" data-search-overlay>
       <div class="overlay__content">
         <form class="overlay__form" data-search-form id="search">
           <label class="overlay__field">
             <div class="overlay__label">Title</div>
-            <input class="overlay__input" data-search-title name="title" placeholder="Any"></input>
+            <input
+              class="overlay__input"
+              data-search-title
+              name="title"
+              placeholder="Any"
+            />
           </label>
 
           <label class="overlay__field">
             <div class="overlay__label">Genre</div>
-            <select class="overlay__input overlay__input_select" data-search-genres name="genre"></select>
+            <select
+              class="overlay__input overlay__input_select"
+              data-search-genres
+              name="genre"
+            ></select>
           </label>
 
           <label class="overlay__field">
             <div class="overlay__label">Author</div>
-            <select class="overlay__input overlay__input_select" data-search-authors name="author">
-            </select>
+            <select
+              class="overlay__input overlay__input_select"
+              data-search-authors
+              name="author"
+            ></select>
           </label>
         </form>
 
+        <!-- Seach menu cancel button and form submit -->
         <div class="overlay__row">
           <button class="overlay__button" data-search-cancel>Cancel</button>
-          <button class="overlay__button overlay__button_primary" type="submit" form="search">Search</button>
+          <button
+            class="overlay__button overlay__button_primary"
+            type="submit"
+            form="search"
+          >
+            Search
+          </button>
+          <!-- this button is set to work with form that has id called search -->
         </div>
       </div>
     </dialog>
 
-    <dialog class="overlay" data-settings-overlay> <!--for the settings button-->
+    <!-- settings form to select day or night theme -->
+    <dialog class="overlay" data-settings-overlay>
       <div class="overlay__content">
         <form class="overlay__form" data-settings-form id="settings">
           <label class="overlay__field">
             <div class="overlay__label">Theme</div>
 
-            <select class="overlay__input overlay__input_select" data-settings-theme name="theme">
+            <select
+              class="overlay__input overlay__input_select"
+              data-settings-theme
+              name="theme"
+            >
               <option value="day">Day</option>
               <option value="night">Night</option>
             </select>
           </label>
         </form>
 
+        <!-- settings cancel button and form submit -->
         <div class="overlay__row">
           <button class="overlay__button" data-settings-cancel>Cancel</button>
-          <button class="overlay__button overlay__button_primary" type="submit" form="settings">Save</button>
+          <button
+            class="overlay__button overlay__button_primary"
+            type="submit"
+            form="settings"
+          >
+            Save
+          </button>
         </div>
       </div>
     </dialog>
-    
+
+    <active-preview></active-preview>
+
     <div class="backdrop"></div>
   </body>
 </html>
